@@ -6,7 +6,7 @@ import streamlit as st
 from pymongo import MongoClient
 
 # MongoDB connection settings
-mongo_uri = "mongodb+srv://thasnihakeem2017:<sGX7Qy9pQGMKuOGj>@sales.g7wqx0t.mongodb.net/?retryWrites=true&w=majority"
+mongo_uri = "mongodb+srv://thasnihakeem2017:m4PIT69br5a1vGI1@sale.cup3qfg.mongodb.net/?retryWrites=true&w=majority"
 database_name = "sales"
 collection_name = "bill"
 
