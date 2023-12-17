@@ -12,7 +12,7 @@ database_name = "sales"
 collection_name = "bill"
 
 # Connect to MongoDB
-client = MongoClient(uri, server_api=ServerApi('1'))
+client = MongoClient(mongo_uri, server_api=ServerApi('1'))
 db = client[database_name]
 collection = db[collection_name]
 
