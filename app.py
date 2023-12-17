@@ -4,6 +4,7 @@ import xmltodict
 import pandas as pd
 import streamlit as st
 from pymongo import MongoClient
+from pymongo.server_api import ServerApi
 
 # MongoDB connection settings
 mongo_uri = "mongodb+srv://thasnihakeem2017:m4PIT69br5a1vGI1@sale.cup3qfg.mongodb.net/?retryWrites=true&w=majority"
@@ -11,7 +12,7 @@ database_name = "sales"
 collection_name = "bill"
 
 # Connect to MongoDB
-client = MongoClient(mongo_uri)
+client = MongoClient(uri, server_api=ServerApi('1'))
 db = client[database_name]
 collection = db[collection_name]
 
