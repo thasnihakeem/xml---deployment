@@ -123,7 +123,7 @@ def show_product_details(bill_barcode):
                 'HSNCode': sale.get('WN:HSNCode'),
                 'ItemID': sale.get('ItemID'),
                 'POSItemID': sale.get('POSIdentity', [{}])[0].get('POSItemID'),
-                'MerchandiseHierarchy': sale.get('MerchandiseHierarchy', [{}])[1].get('#text') if len(sale.get('MerchandiseHierarchy', [{}])) > 1 else None,
+                'MerchandiseHierarchy': sale.get('MerchandiseHierarchy', [{}])[-2].get('#text') if len(sale.get('MerchandiseHierarchy', [{}])) > 1 else None,
                 'Description': sale.get('Description'),
                 'Brand': sale.get('WN:Brand'),
                 'UnitListPrice': sale.get('UnitListPrice'),
