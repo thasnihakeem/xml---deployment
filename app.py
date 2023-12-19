@@ -187,20 +187,11 @@ def show_price_details(bill_barcode):
         if len(line_items) > 4:
             selected_fields = {
                 'CustomerID': latest_document['POSLog']['Transaction']['RetailTransaction']['Customer']['CustomerID'],
-                'TotalAmount': latest_document['POSLog']['Transaction']['RetailTransaction']['Total'][5]['#text'],
-                'DiscountAmount': latest_document['POSLog']['Transaction']['RetailTransaction']['Total'][2]['#text'],
-                'TaxAuthority1': line_items[-2]['Tax']['TaxAuthority'],
-                'TaxAmount1': line_items[-2]['Tax']['Amount'],
-                'TaxPercent1': line_items[-2]['Tax']['Percent'],
-                'TaxRuleID1': line_items[-2]['Tax']['TaxRuleID'],
-                'TaxGroupID1': line_items[-2]['Tax']['TaxGroupID'],
-                'ReceiptPrintCode1': line_items[-2]['Tax']['ReceiptPrintCode'],
-                'TaxAuthority2': line_items[-1]['Tax']['TaxAuthority'],
-                'TaxAmount2': line_items[-1]['Tax']['Amount'],
-                'TaxPercent2': line_items[-1]['Tax']['Percent'],
-                'TaxRuleID2': line_items[-1]['Tax']['TaxRuleID'],
-                'TaxGroupID2': line_items[-1]['Tax']['TaxGroupID'],
-                'ReceiptPrintCode2': line_items[-1]['Tax']['ReceiptPrintCode']}
+                'Total Quantity': latest_document['POSLog']['Transaction']['RetailTransaction']['Total'][5]['#text'],
+                'NetAmount': latest_document['POSLog']['Transaction']['RetailTransaction']['Total'][0]['#text'],
+                'TaxAmount': latest_document['POSLog']['Transaction']['RetailTransaction']['Total'][1]['#text'],
+                'Total Amount': latest_document['POSLog']['Transaction']['RetailTransaction']['Total'][2]['#text'],
+                'Discount Amount': latest_document['POSLog']['Transaction']['RetailTransaction']['Total'][4]['#text']}
             
             # Create a DataFrame from the selected fields
             df = pd.DataFrame([selected_fields])
