@@ -5,6 +5,7 @@ import pandas as pd
 import streamlit as st
 import plotly.express as px
 from pymongo import MongoClient
+import plotly.figure_factory as ff
 from pymongo.server_api import ServerApi
 
 # MongoDB connection settings
