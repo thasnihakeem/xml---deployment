@@ -3,6 +3,7 @@ import json
 import xmltodict
 import pandas as pd
 import streamlit as st
+import plotly.express as px
 from pymongo import MongoClient
 from pymongo.server_api import ServerApi
 
@@ -145,9 +146,11 @@ def show_product_details(bill_barcode):
                 'TaxPercent2': tax_list[0].get('Percent') if len(tax_list) > 0 else 0,
                 'TaxRuleID2': tax_list[0].get('TaxRuleID') if len(tax_list) > 0 else None,
                 'TaxGroupID2': tax_list[0].get('TaxGroupID') if len(tax_list) > 0 else None,
-                'ReceiptPrintCode2': tax_list[0].get('ReceiptPrintCode') if len(tax_list) < 0 else 'SGST'}
+                'ReceiptPrintCode2': tax_list[0].get('ReceiptPrintCode') if len(tax_list) < 0 else 'SGST'
+            }
+            
             if selected_fields['ItemID'] is not None:
-                    selected_fields_list.append(selected_fields)
+                selected_fields_list.append(selected_fields)
 
         # Create a DataFrame from the list of selected fields
         df = pd.DataFrame(selected_fields_list)
@@ -155,6 +158,17 @@ def show_product_details(bill_barcode):
         # Display the DataFrame in a table
         st.subheader("Product Details")
         st.table(df)
+
+        # Calculate TaxAmount
+        df['TaxAmount'] = df['TaxAmount1'] + df['TaxAmount2']
+
+        # Create a bar chart using Plotly Express with Quantity, Discount, and beautiful color
+        fig = px.bar(df, x='Description', y='ExtendedAmount', color='Brand',
+                     title='Product Details for Each Product',
+                     labels={'ExtendedAmount': 'Total Amount'},
+                     hover_data=['QuantityUnits', 'MerchandiseHierarchy', 'TaxGroupID1', 'TaxAmount'],
+                     color_discrete_sequence=px.colors.qualitative.Set3)
+        st.plotly_chart(fig)
     else:
         st.write("No uploaded XML file found.")
 
